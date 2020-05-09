@@ -1,0 +1,12 @@
+div
+    a(href="/admin-user") Admin Users Page
+
+div
+  ul
+    each user in users
+      li
+        span= user.name
+        span &nbsp
+        a(href='/users/' + user.id) View
+        span &nbsp
+        a(href='/users/' + user.id + '/delete') Delete

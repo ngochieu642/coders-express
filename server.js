@@ -11,8 +11,8 @@ const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("db.json");
 const shortId = require("shortid");
 
-db = low(adapter);
-db.defaults({ books: [] }).write();
+const db = low(adapter);
+db.defaults({ books: [], users: [] }).write();
 
 app.set("view engine", "pug");
 app.set("views", "./views");
@@ -29,47 +29,67 @@ app.get("/admin-book", (req, res) => {
   res.render("admin-book");
 });
 
-app.get("/books/:id/delete", (req, res) => {
-  let toDeleteId = req.params.id;
-  deleteById(toDeleteId);
-  res.redirect("/books");
-});
-
 app.get("/books/:id", (req, res) => {
   let itemId = req.params.id;
-  let foundItem = findItemById(itemId);
+  let foundItem = findItemById("books", itemId);
   res.render("book", {
     book: foundItem,
   });
 });
 
 app.get("/books", (req, res) => {
-  let allItems = db.get("books").value();
-  let findName = req.query.q;
-  if (!findName) {
-    res.render("books", {
-      books: allItems,
-    });
-  } else {
-    let foundItems = allItems.filter(function (item) {
-      return item.title.toLowerCase().includes(findName);
-    });
-
-    res.render("books", {
-      books: foundItems,
-    });
-  }
+  renderAllItems("books", req, res);
 });
 
-// App logic
+app.get("/admin-user", (req, res) => {
+  res.render("admin-user");
+});
+
+app.get("/users/:id", (req, res) => {
+  let itemId = req.params.id;
+  let foundItem = findItemById("users", itemId);
+  res.render("user", {
+    user: foundItem,
+  });
+});
+
+app.get("/users", (req, res) => {
+  renderAllItems("users", req, res);
+});
+
+// App logic users
+app.get("/users/:id/delete", (req, res) => {
+  let toDeleteId = req.params.id;
+  deleteById("users", toDeleteId);
+  res.redirect("/users");
+});
+
+app.post("/users/:id/update", (req, res) => {
+  let toUpdateId = req.params.id;
+  updateItemById("users", toUpdateId, req.body);
+  res.redirect("/users");
+});
+
+app.post("/users/create", (req, res) => {
+  addItem("users", req.body);
+  res.redirect("/users");
+});
+
+// App logic books
+app.get("/books/:id/delete", (req, res) => {
+  let toDeleteId = req.params.id;
+  deleteById("books", toDeleteId);
+  res.redirect("/books");
+});
+
 app.post("/books/:id/update", (req, res) => {
   let toUpdateId = req.params.id;
-  updateItemById(toUpdateId, req.body);
+  updateItemById("books", toUpdateId, req.body);
   res.redirect("/books");
 });
 
 app.post("/books/create", (req, res) => {
-  addItem(req.body);
+  addItem("books", req.body);
   res.redirect("/books");
 });
 
@@ -79,20 +99,48 @@ app.listen(process.env.PORT, () => {
 });
 
 // Model function
-const addItem = (item) => {
-  let newItem = { ...item, id: shortId.generate() };
-  !!item && db.get("books").push(newItem).write();
+const addItem = (model, content) => {
+  let newItem = { ...content, id: shortId.generate() };
+  if (!!model && !!content) {
+    db.get(model).push(newItem).write();
+  }
 };
 
-const findItemById = (itemId) => {
-  return db.get("books").find({ id: itemId }).value();
+const findItemById = (modelName, itemId) => {
+  return db.get(modelName).find({ id: itemId }).value();
 };
 
-const deleteById = (itemId) => {
-  db.get("books").remove({ id: itemId }).write();
+const deleteById = (modelName, itemId) => {
+  db.get(modelName).remove({ id: itemId }).write();
 };
 
-const updateItemById = (itemId, content) => {
-  let { title } = content;
-  db.get("books").find({ id: itemId }).assign({ title: title }).write();
+const updateItemById = (modelName, itemId, content) => {
+  switch (modelName) {
+    case "books":
+      let { title } = content;
+      db.get(modelName).find({ id: itemId }).assign({ title: title }).write();
+      break;
+    case "users":
+      let { name } = content;
+      db.get(modelName).find({ id: itemId }).assign({ name: name }).write();
+      break;
+  }
+};
+
+const renderAllItems = (modelName, req, res) => {
+  let allItems = db.get(modelName).value();
+  let findName = req.query.q;
+  if (!findName) {
+    res.render(modelName, {
+      [modelName]: allItems,
+    });
+  } else {
+    let foundItems = allItems.filter(function (item) {
+      return item.title.toLowerCase().includes(findName);
+    });
+
+    res.render(modelName, {
+      [modelName]: foundItems,
+    });
+  }
 };

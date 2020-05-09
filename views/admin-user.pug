@@ -1,0 +1,13 @@
+form(method='GET' action='/books?q=${q}')
+    h1 Search Users
+    div
+        label(for='q') Name:
+        input(type='text', placeholder='Product Name', name='q')
+        button(type='submit') Search
+
+form(method='POST', action="/users/create")
+    h1 Create User
+    div
+        label(for='name') User name
+        input(type="text", placeholder="Name", name="name")
+        button(type="submit") Create

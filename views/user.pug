@@ -1,0 +1,17 @@
+div
+    a(href="/users") Users List
+    span &nbsp
+    a(href="/admin-user") Admin Page
+
+div
+    div
+        b Name
+        span &nbsp
+        span= user.name
+
+        form(method='POST', action="/users/" + user.id + "/update")
+            h4 Update User name
+            div
+                label(for='title') New Name
+                input(type="text", placeholder="New Name", name="name")
+                button(type="submit") Update
