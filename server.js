@@ -6,14 +6,18 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const low = require("lowdb");
+const FileSync = require("lowdb/adapters/FileSync");
+const adapter = new FileSync("db.json");
+
+db = low(adapter);
+db.defaults({ todos: [] }).write();
 
 app.set("view engine", "pug");
 app.set("views", "./views");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const allJobs = ["Đi chợ", "Nấu cơm", "Rửa bát", "Học code tại CodersX"];
 
 // Render
 app.get("/", (request, response) => {
@@ -26,6 +30,7 @@ app.get("/admin-todo", (req, res) => {
 
 app.get("/todos", (req, res) => {
   console.log(req.query);
+  let allJobs = db.get("todos").value();
   let findName = req.query.q;
   if (!findName) {
     res.render("todo", {
@@ -45,11 +50,18 @@ app.get("/todos", (req, res) => {
 // App logic
 app.post("/todos/create", (req, res) => {
   let { todo } = req.body;
-  !!todo && allJobs.push(todo);
-  res.redirect('back')
+  updateTodos(todo);
+  res.redirect("back");
 });
 
 // listen for requests :)
 app.listen(process.env.PORT, () => {
   console.log("Server listening on port " + process.env.PORT);
 });
+
+// Model function
+const updateTodos = (action) => {
+  let id = Date.now();
+  let actionData = { id: id, text: action };
+  !!action && db.get("todos").push(actionData).write();
+};
