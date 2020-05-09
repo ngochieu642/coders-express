@@ -1,0 +1,12 @@
+div
+    a(href="/admin-book") Admin Page
+
+div
+  ul
+    each book in books
+      li
+        span= book.title
+        span &nbsp
+        a(href='/books/' + book.id) View
+        span &nbsp
+        a(href='/books/' + book.id + '/delete') Delete

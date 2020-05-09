@@ -9,9 +9,10 @@ const bodyParser = require("body-parser");
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("db.json");
+const shortId = require("shortid");
 
 db = low(adapter);
-db.defaults({ todos: [] }).write();
+db.defaults({ books: [] }).write();
 
 app.set("view engine", "pug");
 app.set("views", "./views");
@@ -24,48 +25,46 @@ app.get("/", (request, response) => {
   response.send("I love CodersX");
 });
 
-app.get("/admin-todo", (req, res) => {
-  res.render("admin-todo");
+app.get("/admin-book", (req, res) => {
+  res.render("admin-book");
 });
 
-app.get("/todos/:id/delete", (req, res) => {
+app.get("/books/:id/delete", (req, res) => {
   let toDeleteId = req.params.id;
   deleteById(toDeleteId);
-  res.redirect("/todos");
+  res.redirect("/books");
 });
 
-app.get("/todos/:id", (req, res) => {
-  let todoId = req.params.id;
-  let foundItem = findItemById(todoId);
-  res.render("todo", {
-    todo: foundItem,
+app.get("/books/:id", (req, res) => {
+  let itemId = req.params.id;
+  let foundItem = findItemById(itemId);
+  res.render("book", {
+    book: foundItem,
   });
 });
 
-app.get("/todos", (req, res) => {
-  console.log(req.query);
-  let allJobs = db.get("todos").value();
+app.get("/books", (req, res) => {
+  let allItems = db.get("books").value();
   let findName = req.query.q;
   if (!findName) {
-    res.render("todos", {
-      todos: allJobs,
+    res.render("books", {
+      books: allItems,
     });
   } else {
-    let foundItems = allJobs.filter(function (action) {
-      return action.text.toLowerCase().includes(findName);
+    let foundItems = allItems.filter(function (item) {
+      return item.title.toLowerCase().includes(findName);
     });
 
-    res.render("todos", {
-      todos: foundItems,
+    res.render("books", {
+      books: foundItems,
     });
   }
 });
 
 // App logic
-app.post("/todos/create", (req, res) => {
-  let { todo } = req.body;
-  updateTodos(todo);
-  res.redirect("/todos");
+app.post("/books/create", (req, res) => {
+  addItem(req.body);
+  res.redirect("/books");
 });
 
 // listen for requests :)
@@ -74,19 +73,20 @@ app.listen(process.env.PORT, () => {
 });
 
 // Model function
-const updateTodos = (action) => {
-  let id = Date.now();
-  let actionData = { id: id, text: action };
-  !!action && db.get("todos").push(actionData).write();
+const addItem = (item) => {
+  let newItem = { ...item, id: shortId.generate() };
+  !!item && db.get("books").push(newItem).write();
 };
 
 const findItemById = (itemId) => {
   return db
-    .get("todos")
-    .find({ id: +itemId })
+    .get("books")
+    .find({ id: itemId })
     .value();
 };
 
 const deleteById = (itemId) => {
-  db.get("todos").remove({ id: +itemId }).write();
+  db.get("books")
+    .remove({ id: itemId })
+    .write();
 };

@@ -1,0 +1,16 @@
+form(method='GET' action='/books?q=${q}')
+    h1 Search Products
+    div
+        label(for='q') Name:
+        input(type='text', placeholder='Product Name', name='q')
+        button(type='submit') Search
+
+form(method='POST', action="/books/create")
+    h1 Create Products
+    div
+        label(for='title') Book Name
+        input(type="text", placeholder="Book title", name="title")
+
+        label(for='description') Description
+        input(type="text", placeholder="Description", name="description")
+        button(type="submit") Create
