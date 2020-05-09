@@ -46,7 +46,7 @@ app.get("/todos", (req, res) => {
 app.post("/todos/create", (req, res) => {
   let { todo } = req.body;
   !!todo && allJobs.push(todo);
-  res.redirect('/todos')
+  res.redirect('back')
 });
 
 // listen for requests :)
