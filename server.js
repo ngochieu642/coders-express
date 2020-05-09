@@ -15,6 +15,10 @@ app.get("/", (request, response) => {
   response.send("I love CodersX");
 });
 
+app.get("/search-product", (req, res)=>{
+  res.render('search-product')
+})
+
 app.get("/todos", (req, res) => {
   console.log(req.query);
   let findName = req.query.q;
