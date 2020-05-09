@@ -5,19 +5,24 @@
 // but feel free to use whatever libraries or frameworks you'd like through `package.json`.
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 
 app.set("view engine", "pug");
 app.set("views", "./views");
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 const allJobs = ["Đi chợ", "Nấu cơm", "Rửa bát", "Học code tại CodersX"];
 
+// Render
 app.get("/", (request, response) => {
   response.send("I love CodersX");
 });
 
-app.get("/search-product", (req, res)=>{
-  res.render('search-product')
-})
+app.get("/admin-todo", (req, res) => {
+  res.render("admin-todo");
+});
 
 app.get("/todos", (req, res) => {
   console.log(req.query);
@@ -35,6 +40,13 @@ app.get("/todos", (req, res) => {
       jobs: foundItems,
     });
   }
+});
+
+// App logic
+app.post("/todos/create", (req, res) => {
+  let { todo } = req.body;
+  !!todo && allJobs.push(todo);
+  res.redirect('/todos')
 });
 
 // listen for requests :)

@@ -1,0 +1,13 @@
+form(method='GET' action='/todos?q=${q}')
+    h1 Search Products
+    div
+        label(for='q') Name:
+        input(type='text', placeholder='Product Name', name='q')
+        button(type='submit') Search
+
+form(method='POST', action="/todos/create")
+    h1 Create Products
+    div
+        label(for='todo')
+        input(type="text", placeholder="New product name", name="todo")
+        button(type="submit") Create
