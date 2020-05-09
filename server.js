@@ -10,7 +10,7 @@ const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("db.json");
 
-db = low(adapter);
+const db = low(adapter);
 db.defaults({ todos: [] }).write();
 
 app.set("view engine", "pug");
@@ -43,7 +43,6 @@ app.get("/todos/:id", (req, res) => {
 });
 
 app.get("/todos", (req, res) => {
-  console.log(req.query);
   let allJobs = db.get("todos").value();
   let findName = req.query.q;
   if (!findName) {
