@@ -62,6 +62,12 @@ app.get("/books", (req, res) => {
 });
 
 // App logic
+app.post("/books/:id/update", (req, res) => {
+  let toUpdateId = req.params.id;
+  updateItemById(toUpdateId, req.body);
+  res.redirect("/books");
+});
+
 app.post("/books/create", (req, res) => {
   addItem(req.body);
   res.redirect("/books");
@@ -79,14 +85,14 @@ const addItem = (item) => {
 };
 
 const findItemById = (itemId) => {
-  return db
-    .get("books")
-    .find({ id: itemId })
-    .value();
+  return db.get("books").find({ id: itemId }).value();
 };
 
 const deleteById = (itemId) => {
-  db.get("books")
-    .remove({ id: itemId })
-    .write();
+  db.get("books").remove({ id: itemId }).write();
+};
+
+const updateItemById = (itemId, content) => {
+  let { title } = content;
+  db.get("books").find({ id: itemId }).assign({ title: title }).write();
 };

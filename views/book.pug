@@ -8,7 +8,14 @@ div
         b Title
         span &nbsp
         span= book.title
+
+        form(method='POST', action="/books/" + book.id + "/update")
+                h4 Update Title
+                div
+                    label(for='title') New Title
+                    input(type="text", placeholder="Book title", name="title")
+                    button(type="submit") Update
+       
     div
         b Description
         p= book.description
-    
