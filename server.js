@@ -136,7 +136,14 @@ const renderAllItems = (modelName, req, res) => {
     });
   } else {
     let foundItems = allItems.filter(function (item) {
-      return item.title.toLowerCase().includes(findName);
+      switch (modelName) {
+        case "book":
+          return item.title.toLowerCase().includes(findName);
+          break;
+        case "users":
+          return item.name.toLowerCase().includes(findName);
+          break;
+      }
     });
 
     res.render(modelName, {
