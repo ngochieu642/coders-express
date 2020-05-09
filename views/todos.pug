@@ -1,0 +1,12 @@
+div
+    a(href="/admin-todo") Admin Page
+
+div
+  ul
+    each todo in todos
+      li
+        span= todo.text
+        span &nbsp
+        a(href='/todos/' + todo.id) View
+        span &nbsp
+        a(href='/todos/' + todo.id + '/delete') Delete

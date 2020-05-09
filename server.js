@@ -28,21 +28,35 @@ app.get("/admin-todo", (req, res) => {
   res.render("admin-todo");
 });
 
+app.get("/todos/:id/delete", (req, res) => {
+  let toDeleteId = req.params.id;
+  deleteById(toDeleteId);
+  res.redirect("/todos");
+});
+
+app.get("/todos/:id", (req, res) => {
+  let todoId = req.params.id;
+  let foundItem = findItemById(todoId);
+  res.render("todo", {
+    todo: foundItem,
+  });
+});
+
 app.get("/todos", (req, res) => {
   console.log(req.query);
   let allJobs = db.get("todos").value();
   let findName = req.query.q;
   if (!findName) {
-    res.render("todo", {
-      jobs: allJobs,
+    res.render("todos", {
+      todos: allJobs,
     });
   } else {
     let foundItems = allJobs.filter(function (action) {
       return action.text.toLowerCase().includes(findName);
     });
 
-    res.render("todo", {
-      jobs: foundItems,
+    res.render("todos", {
+      todos: foundItems,
     });
   }
 });
@@ -51,7 +65,7 @@ app.get("/todos", (req, res) => {
 app.post("/todos/create", (req, res) => {
   let { todo } = req.body;
   updateTodos(todo);
-  res.redirect("back");
+  res.redirect("/todos");
 });
 
 // listen for requests :)
@@ -64,4 +78,15 @@ const updateTodos = (action) => {
   let id = Date.now();
   let actionData = { id: id, text: action };
   !!action && db.get("todos").push(actionData).write();
+};
+
+const findItemById = (itemId) => {
+  return db
+    .get("todos")
+    .find({ id: +itemId })
+    .value();
+};
+
+const deleteById = (itemId) => {
+  db.get("todos").remove({ id: +itemId }).write();
 };

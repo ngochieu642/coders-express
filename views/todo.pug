@@ -1,7 +1,8 @@
 div
+    a(href="/todos") Todo list
     a(href="/admin-todo") Admin Page
 
 div
-  ul
-    each val in jobs
-      li= val.text
+    b Action
+    span &nbsp
+    span= todo.text
