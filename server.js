@@ -38,7 +38,7 @@ app.get("/todos", (req, res) => {
     });
   } else {
     let foundItems = allJobs.filter(function (action) {
-      return action.toLowerCase().includes(findName);
+      return action.text.toLowerCase().includes(findName);
     });
 
     res.render("todo", {
