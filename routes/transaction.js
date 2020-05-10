@@ -20,7 +20,7 @@ router.get("/:id", (req, res) => {
   let itemId = req.params.id;
   let foundItem = findItemById("transactions", itemId);
   res.render("transaction", {
-    user: foundItem,
+    transaction: foundItem,
   });
 });
 
