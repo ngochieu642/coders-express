@@ -1,45 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db");
-const {
-  findItemById,
-  renderAllItems,
-  deleteById,
-  updateItemById,
-  addItem,
-} = db;
+const controller = require("../controller/books");
 
-router.get("/create", (req, res) => {
-  res.render("admin-book");
-});
-
-router.get("/:id", (req, res) => {
-  let itemId = req.params.id;
-  let foundItem = findItemById("books", itemId);
-  res.render("book", {
-    book: foundItem,
-  });
-});
-
-router.get("/", (req, res) => {
-  renderAllItems("books", req, res);
-});
-
-router.get("/:id/delete", (req, res) => {
-  let toDeleteId = req.params.id;
-  deleteById("books", toDeleteId);
-  res.redirect("/books");
-});
-
-router.post("/:id/update", (req, res) => {
-  let toUpdateId = req.params.id;
-  updateItemById("books", toUpdateId, req.body);
-  res.redirect("/books");
-});
-
-router.post("/create", (req, res) => {
-  addItem("books", req.body);
-  res.redirect("/books");
-});
+router.get("/create", controller.getCreate);
+router.get("/:id", controller.getItemById);
+router.get("/", controller.root);
+router.get("/:id/delete", controller.getDeleteById);
+router.post("/:id/update", controller.postUpdateById);
+router.post("/create", controller.postCreate);
 
 module.exports = router;
