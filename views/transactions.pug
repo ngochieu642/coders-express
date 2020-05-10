@@ -14,10 +14,10 @@ div
         div
           a(href='/transactions/' + transaction.id)= transaction.id
         div
-          span= "User ID: " + transaction.user
+          span= "User ID: " + transaction.userId
           span &nbsp
-          a(href='/users/' + transaction.user) View
+          a(href='/users/' + transaction.userId) View
         div
-          span= "Book ID: " + transaction.book
+          span= "Book ID: " + transaction.bookId
           span &nbsp
-          a(href='/books/' + transaction.book) View
+          a(href='/books/' + transaction.bookId) View
