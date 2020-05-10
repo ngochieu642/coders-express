@@ -9,6 +9,10 @@ const {
   addItem,
 } = db;
 
+router.get("/create", (req, res) => {
+  res.render("admin-book");
+});
+
 router.get("/:id", (req, res) => {
   let itemId = req.params.id;
   let foundItem = findItemById("books", itemId);

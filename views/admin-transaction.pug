@@ -1,0 +1,22 @@
+div
+    a(href="/books") Books
+    span &nbsp
+    a(href="/users") Users
+    span &nbsp
+    a(href="/transactions") Transactions
+
+form(method='POST', action="/transactions/create")
+    h1 Create Transaction
+    div
+        label(for='book') Select Book
+        select(name='book')
+            each book in books
+                option(value=book.id)= book.title 
+        
+        label(for='user') Select User
+        select(name='user')
+            each user in users
+                option(value=user.id)= user.name
+            
+
+        button(type="submit") Create

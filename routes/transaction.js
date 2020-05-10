@@ -10,36 +10,39 @@ const {
 } = db;
 
 router.get("/create", (req, res) => {
-  res.render("admin-user");
+  res.render("admin-transaction", {
+    books: db.get("books").value(),
+    users: db.get("users").value(),
+  });
 });
 
 router.get("/:id", (req, res) => {
   let itemId = req.params.id;
-  let foundItem = findItemById("users", itemId);
-  res.render("user", {
+  let foundItem = findItemById("transactions", itemId);
+  res.render("transaction", {
     user: foundItem,
   });
 });
 
 router.get("/", (req, res) => {
-  renderAllItems("users", req, res);
+  renderAllItems("transactions", req, res);
 });
 
 router.get("/:id/delete", (req, res) => {
   let toDeleteId = req.params.id;
-  deleteById("users", toDeleteId);
-  res.redirect("/users");
+  deleteById("transactions", toDeleteId);
+  res.redirect("/transactions");
 });
 
 router.post("/:id/update", (req, res) => {
   let toUpdateId = req.params.id;
-  updateItemById("users", toUpdateId, req.body);
-  res.redirect("/users");
+  updateItemById("transactions", toUpdateId, req.body);
+  res.redirect("/transactions");
 });
 
 router.post("/create", (req, res) => {
-  addItem("users", req.body);
-  res.redirect("/users");
+  addItem("transactions", req.body);
+  res.redirect("/transactions");
 });
 
 module.exports = router;

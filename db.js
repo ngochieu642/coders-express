@@ -4,7 +4,7 @@ const adapter = new FileSync("db.json");
 const shortId = require("shortid");
 
 const db = low(adapter);
-db.defaults({ books: [], users: [] }).write();
+db.defaults({ books: [], users: [], transactions: [] }).write();
 
 // Model function
 db.addItem = (model, content) => {

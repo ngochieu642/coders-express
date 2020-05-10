@@ -10,6 +10,7 @@ const FileSync = require("lowdb/adapters/FileSync");
 
 const userRoutes = require("./routes/users");
 const bookRoutes = require("./routes/books");
+const transactionRoutes = require("./routes/transaction");
 
 app.set("view engine", "pug");
 app.set("views", "./views");
@@ -19,18 +20,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/users", userRoutes);
 app.use("/books", bookRoutes);
+app.use("/transactions", transactionRoutes);
 
 // Render
 app.get("/", (request, response) => {
   response.send("I love CodersX");
-});
-
-app.get("/admin-book", (req, res) => {
-  res.render("admin-book");
-});
-
-app.get("/admin-user", (req, res) => {
-  res.render("admin-user");
 });
 
 // listen for requests :)
