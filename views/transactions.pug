@@ -5,15 +5,19 @@ div
     span &nbsp
     a(href="/transactions/create") Admin Transactions Page
 
+h2 Transactions List
+
 div
-  ul
+  ol
     each transaction in transactions
       li
-        h4= "Transaction ID: " + transaction.id
-        span= "User ID: " + transaction.user
-        span &nbsp
-        a(href='/users/' + transaction.user) View
-        br
-        span= "Book ID: " + transaction.book
-        span &nbsp
-        a(href='/books/' + transaction.book) View
+        div
+          a(href='/transactions/' + transaction.id)= transaction.id
+        div
+          span= "User ID: " + transaction.user
+          span &nbsp
+          a(href='/users/' + transaction.user) View
+        div
+          span= "Book ID: " + transaction.book
+          span &nbsp
+          a(href='/books/' + transaction.book) View
