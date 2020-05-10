@@ -6,11 +6,10 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const FileSync = require("lowdb/adapters/FileSync");
 
 const userRoutes = require("./routes/users");
 const bookRoutes = require("./routes/books");
-const transactionRoutes = require("./routes/transaction");
+const transactionRoutes = require("./routes/transactions");
 
 app.set("view engine", "pug");
 app.set("views", "./views");
