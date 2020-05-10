@@ -13,6 +13,9 @@ div
       li
         div
           a(href='/transactions/' + transaction.id)= transaction.id
+          span
+            p= "Is Complete: " + transaction.isComplete
+            a(href='/transactions/' + transaction.id + '/complete') Complete
         div
           span= "User ID: " + transaction.userId
           span &nbsp

@@ -6,6 +6,7 @@ router.get("/create", controller.getCreate);
 router.get("/:id", controller.getItemById);
 router.get("/", controller.root);
 router.get("/:id/delete", controller.getDeleteById);
+router.get("/:id/complete", controller.getCompleteById)
 router.post("/:id/update", controller.postUpdateById);
 router.post("/create", controller.postCreate);
 

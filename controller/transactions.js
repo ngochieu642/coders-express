@@ -35,7 +35,12 @@ module.exports = {
     res.redirect("/transactions");
   },
   postCreate: (req, res) => {
-    addItem("transactions", req.body);
+    addItem("transactions", {...req.body, isComplete: false});
     res.redirect("/transactions");
   },
+  getCompleteById: (req, res) => {
+    let toUpdateId = req.params.id;
+    db.get("transactions").find({ id: toUpdateId }).assign({ isComplete: true }).write();
+    res.redirect("/transactions");
+  }
 };
