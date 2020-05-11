@@ -1,12 +1,5 @@
 extends ./layouts/common.pug
 block content
-    div
-        a(href="/books") Books
-        span &nbsp
-        a(href="/users") Users
-        span &nbsp
-        a(href="/transactions") Transactions
-
     form(method='GET', action='/books?q=${q}', class='form-group')
         h1 Search Books
         div(class="d-flex")

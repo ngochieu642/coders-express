@@ -1,12 +1,5 @@
 extends ./layouts/common.pug
 block content
-    div
-        a(href="/books") Books
-        span &nbsp
-        a(href="/users") Users
-        span &nbsp
-        a(href="/transactions") Transactions
-
     form(method='POST', action="/transactions/create", class='form-group')
         h1 Create Transaction
         div(class="input-group-sm mb-3")
