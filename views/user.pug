@@ -1,17 +1,14 @@
-div
-    a(href="/users") Users List
-    span &nbsp
-    a(href="/users/create") Admin Page
-
-div
-    div
-        b Name
+extends ./layouts/common.pug
+block content
+    div(class='d-flex')
+        h2 Name
         span &nbsp
-        span= user.name
-
-        form(method='POST', action="/users/" + user.id + "/update")
+        h2
+            span(class="badge badge-dark")= user.name
+    div
+        form(method='POST', action="/users/" + user.id + "/update", class='form-group')
             h4 Update User name
-            div
-                label(for='title') New Name
-                input(type="text", placeholder="New Name", name="name")
-                button(type="submit") Update
+            div(class='d-flex')
+                label(for='title', class='input-group-text') New Name
+                input(type="text", placeholder="New Name", name="name", class="form-control")
+                button(type="submit", class="btn btn-primary") Update

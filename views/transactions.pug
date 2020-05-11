@@ -1,26 +1,24 @@
-div
-    a(href="/books/create") Admin Books Page
-    span &nbsp
-    a(href="/users/create") Admin Users Page
-    span &nbsp
-    a(href="/transactions/create") Admin Transactions Page
+extends ./layouts/common.pug
+block content
+  h2 Transactions List
 
-h2 Transactions List
-
-div
-  ol
-    each transaction in transactions
-      li
-        div
-          a(href='/transactions/' + transaction.id)= transaction.id
-          span
-            p= "Is Complete: " + transaction.isComplete
-            a(href='/transactions/' + transaction.id + '/complete') Complete
-        div
-          span= "User ID: " + transaction.userId
-          span &nbsp
-          a(href='/users/' + transaction.userId) View
-        div
-          span= "Book ID: " + transaction.bookId
-          span &nbsp
-          a(href='/books/' + transaction.bookId) View
+  div
+    ol(class="list-group")
+      each transaction in transactions
+        li(class="list-group-item")
+          div
+            h4 
+              a(class="badge badge-primary", href='/transactions/' + transaction.id)= transaction.id
+          
+          div(class='d-flex')
+              span= "Is Complete: " + transaction.isComplete
+              if !transaction.isComplete 
+                a(class="badge badge-success", href='/transactions/' + transaction.id + '/complete') Complete
+          div
+            span= "User ID: " + transaction.userId
+            span &nbsp
+            a(class="badge badge-primary", href='/users/' + transaction.userId) View
+          div
+            span= "Book ID: " + transaction.bookId
+            span &nbsp
+            a(class="badge badge-primary", href='/books/' + transaction.bookId) View

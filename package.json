@@ -29,6 +29,7 @@
     "express"
   ],
   "devDependencies": {
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "popper.js": "^1.11.0"
   }
 }

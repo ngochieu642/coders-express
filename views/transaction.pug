@@ -1,14 +1,10 @@
-div
-    a(href="/transactions") Transactions List
-    span &nbsp
-    a(href="/transactions/create") Admin Page
-
-div
+extends ./layouts/common.pug
+block content
     div
-        b User
-        span &nbsp
-        span= transaction.userId
-       
-    div
-        b Book
-        span= transaction.bookId
+        div(class="blockquote")
+            h4(class="badge badge-secondary") User
+            span= transaction.userId
+        
+        div(class="blockquote")
+            h4(class="badge badge-secondary") Book
+            span= transaction.bookId

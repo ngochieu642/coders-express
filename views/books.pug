@@ -1,18 +1,12 @@
-div
-    a(href="/books/create") Admin Books Page
-    span &nbsp
-    a(href="/users/create") Admin Users Page
-    span &nbsp
-    a(href="/transactions/create") Admin Transactions Page
+extends ./layouts/common.pug
 
-h2 Books List
-
-div
-  ul
-    each book in books
-      li
-        span= book.title
-        span &nbsp
-        a(href='/books/' + book.id) View
-        span &nbsp
-        a(href='/books/' + book.id + '/delete') Delete
+block content
+  div
+    ul(class="list-group")
+      each book in books
+        li(class="list-group-item")
+          span= book.title
+          span &nbsp
+          a(class="badge badge-primary", href='/books/' + book.id) View
+          span &nbsp
+          a(class="badge badge-danger", href='/books/' + book.id + '/delete') Delete

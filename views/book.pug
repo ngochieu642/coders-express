@@ -1,21 +1,18 @@
-div
-    a(href="/books") Books List
-    span &nbsp
-    a(href="/books/create") Admin Page
-
-div
-    div
-        b Title
+extends ./layouts/common.pug
+block content
+    div(class='d-flex')
+        h2 Title
         span &nbsp
-        span= book.title
-
-        form(method='POST', action="/books/" + book.id + "/update")
-                h4 Update Title
-                div
-                    label(for='title') New Title
-                    input(type="text", placeholder="Book title", name="title")
-                    button(type="submit") Update
-       
+        h2
+            span(class="badge badge-dark")= book.title
     div
-        b Description
+        form(method='POST', action="/books/" + book.id + "/update",class='form-group')
+            h4 Update Title
+            div(class='d-flex')
+                label(for='title', class='input-group-text') New Title
+                input(type="text", placeholder="Book title", name="title", class="form-control")
+                button(type="submit", class="btn btn-primary") Update
+    
+    div(class="modal-content")
+        h1(class="badge badge-success") Description
         p= book.description

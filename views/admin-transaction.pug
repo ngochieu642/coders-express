@@ -1,22 +1,22 @@
-div
-    a(href="/books") Books
-    span &nbsp
-    a(href="/users") Users
-    span &nbsp
-    a(href="/transactions") Transactions
-
-form(method='POST', action="/transactions/create")
-    h1 Create Transaction
+extends ./layouts/common.pug
+block content
     div
-        label(for='book') Select Book
-        select(name='bookId')
-            each book in books
-                option(value=book.id)= book.title 
-        
-        label(for='user') Select User
-        select(name='userId')
-            each user in users
-                option(value=user.id)= user.name
-            
+        a(href="/books") Books
+        span &nbsp
+        a(href="/users") Users
+        span &nbsp
+        a(href="/transactions") Transactions
 
-        button(type="submit") Create
+    form(method='POST', action="/transactions/create", class='form-group')
+        h1 Create Transaction
+        div(class="input-group-sm mb-3")
+            div(class='d-flex')
+                label(for='book', class='input-group-text') Select Book
+                select(name='bookId', class="form-control")
+                    each book in books
+                        option(value=book.id)= book.title 
+                label(for='user', class='input-group-text') Select User
+                select(name='userId', class="form-control")
+                    each user in users
+                        option(value=user.id)= user.name
+                button(type="submit", class="btn btn-primary") Create

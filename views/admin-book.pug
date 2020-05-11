@@ -1,23 +1,24 @@
-div
-    a(href="/books") Books
-    span &nbsp
-    a(href="/users") Users
-    span &nbsp
-    a(href="/transactions") Transactions
-
-form(method='GET' action='/books?q=${q}')
-    h1 Search Books
+extends ./layouts/common.pug
+block content
     div
-        label(for='q') Name:
-        input(type='text', placeholder='Product Name', name='q')
-        button(type='submit') Search
+        a(href="/books") Books
+        span &nbsp
+        a(href="/users") Users
+        span &nbsp
+        a(href="/transactions") Transactions
 
-form(method='POST', action="/books/create")
-    h1 Create Book
-    div
-        label(for='title') Book Name
-        input(type="text", placeholder="Book title", name="title")
+    form(method='GET', action='/books?q=${q}', class='form-group')
+        h1 Search Books
+        div(class="d-flex")
+            label(for='q', class='input-group-text') Name:
+            input(type='text', placeholder='Product Name', name='q', class="form-control")
+            button(type='submit', class="btn btn-primary") Search
 
-        label(for='description') Description
-        input(type="text", placeholder="Description", name="description")
-        button(type="submit") Create
+    form(method='POST', action="/books/create")
+        h1 Create Book
+        div(class='d-flex')
+            label(for='title', class='input-group-text') Book Name
+            input(type="text", placeholder="Book title", name="title", class="form-control")
+            label(for='description', class='input-group-text') Description
+            input(type="text", placeholder="Description", name="description", class="form-control")
+            button(type="submit", class="btn btn-primary") Create

@@ -1,20 +1,22 @@
-div
-    a(href="/books") Books
-    span &nbsp
-    a(href="/users") Users
-    span &nbsp
-    a(href="/transactions") Transactions
-    
-form(method='GET' action='/users?q=${q}')
-    h1 Search Users
+extends ./layouts/common.pug
+block content
     div
-        label(for='q') Name:
-        input(type='text', placeholder='Product Name', name='q')
-        button(type='submit') Search
+        a(href="/books") Books
+        span &nbsp
+        a(href="/users") Users
+        span &nbsp
+        a(href="/transactions") Transactions
+        
+    form(method='GET' action='/users?q=${q}', class='form-group')
+        h1 Search Users
+        div(class="d-flex")
+            label(for='q', class='input-group-text') Name:
+            input(type='text', placeholder='Product Name', name='q', class="form-control")
+            button(type='submit', class="btn btn-primary") Search
 
-form(method='POST', action="/users/create")
-    h1 Create User
-    div
-        label(for='name') User name
-        input(type="text", placeholder="Name", name="name")
-        button(type="submit") Create
+    form(method='POST', action="/users/create")
+        h1 Create User
+        div(class='d-flex')
+            label(for='name', class='input-group-text') User name
+            input(type="text", placeholder="Name", name="name", class="form-control")
+            button(type="submit", class="btn btn-primary") Create
