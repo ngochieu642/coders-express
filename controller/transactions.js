@@ -35,12 +35,34 @@ module.exports = {
     res.redirect("/transactions");
   },
   postCreate: (req, res) => {
-    addItem("transactions", {...req.body, isComplete: false});
+    addItem("transactions", { ...req.body, isComplete: false });
     res.redirect("/transactions");
   },
   getCompleteById: (req, res) => {
+    let errs = [];
     let toUpdateId = req.params.id;
-    db.get("transactions").find({ id: toUpdateId }).assign({ isComplete: true }).write();
+    let foundItem = db.get("transactions").find({ id: toUpdateId }).value();
+
+    let modelName = "transactions";
+    let allItems = db.get(modelName).value();
+    
+    
+    if (!foundItem) {
+      errs.push("ID not found");
+    }
+
+    if (errs.length) {
+      res.render("transactions", {
+        errors: errs,
+        transactions: allItems
+      });
+      return;
+    }
+
+    db.get("transactions")
+      .find({ id: toUpdateId })
+      .assign({ isComplete: true })
+      .write();
     res.redirect("/transactions");
-  }
+  },
 };
