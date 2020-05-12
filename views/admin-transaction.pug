@@ -5,11 +5,11 @@ block content
         div(class="input-group-sm mb-3")
             div(class='d-flex')
                 label(for='book', class='input-group-text') Select Book
-                select(name='bookId', class="form-control")
+                select(id="book", name='bookId', class="form-control")
                     each book in books
                         option(value=book.id)= book.title 
                 label(for='user', class='input-group-text') Select User
-                select(name='userId', class="form-control")
+                select(id="user", name='userId', class="form-control")
                     each user in users
                         option(value=user.id)= user.name
                 button(type="submit", class="btn btn-primary") Create

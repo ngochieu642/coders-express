@@ -4,12 +4,12 @@ block content
         h1 Search Users
         div(class="d-flex")
             label(for='q', class='input-group-text') Name:
-            input(type='text', placeholder='Product Name', name='q', class="form-control")
+            input(id='q', type='text', placeholder='Product Name', name='q', class="form-control")
             button(type='submit', class="btn btn-primary") Search
 
     form(method='POST', action="/users/create")
         h1 Create User
         div(class='d-flex')
             label(for='name', class='input-group-text') User name
-            input(type="text", placeholder="Name", name="name", class="form-control")
+            input(id='name', type="text", placeholder="Name", name="name", class="form-control")
             button(type="submit", class="btn btn-primary") Create
