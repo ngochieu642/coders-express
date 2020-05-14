@@ -6,6 +6,8 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const { countCookie } = require("./middleware/cookie");
 
 const userRoutes = require("./routes/users");
 const bookRoutes = require("./routes/books");
@@ -14,16 +16,17 @@ const transactionRoutes = require("./routes/transactions");
 app.set("view engine", "pug");
 app.set("views", "./views");
 app.use(express.static("public"));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-app.use("/users", userRoutes);
-app.use("/books", bookRoutes);
-app.use("/transactions", transactionRoutes);
+app.use("/users", countCookie, userRoutes);
+app.use("/books", countCookie, bookRoutes);
+app.use("/transactions", countCookie, transactionRoutes);
 
 // Render
-app.get("/", (request, response) => {
+app.get("/", countCookie, (request, response) => {
+  response.cookie("username", "hieuthai642");
   response.send("I love CodersX");
 });
 
