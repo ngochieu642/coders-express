@@ -29,7 +29,15 @@ module.exports = {
     }
 
     debugService.info(`UserId ${user.id} logged in`);
-    res.cookie('userId', user.id)
-    res.redirect("/books");
+    res.cookie("userId", user.id);
+
+    if (!user || !user.isAdmin) {
+      debugService.info(`Not Amin User`);
+      res.redirect("/transactions");
+      return;
+    } else {
+      res.redirect("/users/create");
+      return;
+    }
   },
 };

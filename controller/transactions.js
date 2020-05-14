@@ -9,8 +9,25 @@ const {
 
 module.exports = {
   root: (req, res) => {
-    renderAllItems("transactions", req, res);
+    let allItems = db.get("transactions").value();
+    let filteredItems;
+
+    if (req.cookies.userId) {
+      let user = db.get("users").find({ id: req.cookies.userId }).value();
+      if (user.isAdmin) {
+        filteredItems = allItems;
+      } else {
+        filteredItems = allItems.filter((x) => {
+          return x.userId === user.id;
+        });
+      }
+    }
+
+    res.render("transactions", {
+      transactions: filteredItems,
+    });
   },
+
   getCreate: (req, res) => {
     res.render("admin-transaction", {
       books: db.get("books").value(),
@@ -45,8 +62,7 @@ module.exports = {
 
     let modelName = "transactions";
     let allItems = db.get(modelName).value();
-    
-    
+
     if (!foundItem) {
       errs.push("ID not found");
     }
@@ -54,7 +70,7 @@ module.exports = {
     if (errs.length) {
       res.render("transactions", {
         errors: errs,
-        transactions: allItems
+        transactions: allItems,
       });
       return;
     }
