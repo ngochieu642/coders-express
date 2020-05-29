@@ -1,0 +1,109 @@
+{
+  "books": [
+    {
+      "title": "First Book",
+      "description": "Nice book to start",
+      "id": "s3TqXVWer"
+    },
+    {
+      "title": "Second Book",
+      "description": "Good for beginer",
+      "id": "RsuBdV0gF"
+    },
+    {
+      "title": "Third Book",
+      "description": "More advanced techniques",
+      "id": "uYTZCCNGQ"
+    },
+    {
+      "title": "Fourth Book",
+      "description": "Expert",
+      "id": "7KZbl1oD1"
+    },
+    {
+      "title": "Cửu âm chân kinh",
+      "description": "Nguy hiểm",
+      "id": "F-s7Www5L"
+    },
+    {
+      "title": "Cửu dương chân kinh",
+      "description": "Nội công sách",
+      "id": "CTmiPbWQv"
+    }
+  ],
+  "users": [
+    {
+      "name": "Nguyen Van B",
+      "id": "WYMB3--0Z",
+      "email": "WYMB3--0Z@gmail.com",
+      "password": "123123",
+      "isAdmin": false
+    },
+    {
+      "name": "Ly Thi C",
+      "id": "NlNKCuKHm",
+      "email": "NlNKCuKHm@gmail.com",
+      "password": "123123",
+      "isAdmin": false
+    },
+    {
+      "name": "Sáng",
+      "id": "vUx7VgHj0",
+      "email": "vUx7VgHj0@gmail.com",
+      "password": "123123",
+      "isAdmin": false
+    },
+    {
+      "name": "Đào Thị Cam",
+      "id": "8gd5HBarJ",
+      "email": "8gd5HBarJ@gmail.com",
+      "password": "123123",
+      "isAdmin": false
+    },
+    {
+      "name": "Lý Mạc Sầu",
+      "id": "ywi5jwWgZ",
+      "email": "ywi5jwWgZ@gmail.com",
+      "password": "123123",
+      "isAdmin": true
+    }
+  ],
+  "transactions": [
+    {
+      "bookId": "s3TqXVWer",
+      "userId": "WYMB3--0Z",
+      "isComplete": true,
+      "id": "2xOlJvX3t"
+    },
+    {
+      "bookId": "RsuBdV0gF",
+      "userId": "NlNKCuKHm",
+      "isComplete": true,
+      "id": "xgt10Iqb1"
+    },
+    {
+      "bookId": "7KZbl1oD1",
+      "userId": "WYMB3--0Z",
+      "isComplete": true,
+      "id": "XA-3zPhfp"
+    },
+    {
+      "bookId": "uYTZCCNGQ",
+      "userId": "NlNKCuKHm",
+      "isComplete": true,
+      "id": "FZ8xHykkg"
+    },
+    {
+      "bookId": "F-s7Www5L",
+      "userId": "ywi5jwWgZ",
+      "isComplete": true,
+      "id": "f6c5UFkr9"
+    },
+    {
+      "bookId": "CTmiPbWQv",
+      "userId": "8gd5HBarJ",
+      "isComplete": false,
+      "id": "6Oa_LrgDD"
+    }
+  ]
+}
