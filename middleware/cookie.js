@@ -4,8 +4,8 @@ let cookieObj = {};
 
 module.exports = {
   countCookie: (req, res, next) => {
-    if (req.cookies) {
-      Object.entries(req.cookies).forEach(([name, value]) => {
+    if (req.signedCookies) {
+      Object.entries(req.signedCookies).forEach(([name, value]) => {
         debugService.debug(`Cookie Name: ${name}`);
         debugService.debug(`Cookie Value: ${value}`);
 

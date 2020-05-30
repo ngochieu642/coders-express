@@ -12,8 +12,8 @@ module.exports = {
     let allItems = db.get("transactions").value();
     let filteredItems;
 
-    if (req.cookies.userId) {
-      let user = db.get("users").find({ id: req.cookies.userId }).value();
+    if (req.signedCookies.userId) {
+      let user = db.get("users").find({ id: req.signedCookies.userId }).value();
       if (user.isAdmin) {
         filteredItems = allItems;
       } else {

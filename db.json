@@ -36,37 +36,38 @@
       "name": "Nguyen Van B",
       "id": "WYMB3--0Z",
       "email": "WYMB3--0Z@gmail.com",
-      "password": "4297f44b13955235245b2497399d7a93",
-      "isAdmin": false
+      "password": "$2b$10$U6YH03AECcvOdNKdeLMxSeICeCNH15a4ff.Bzlatu6IaYeCo9VvVC",
+      "isAdmin": false,
+      "wrongLoginCount": 2
     },
     {
       "name": "Ly Thi C",
       "id": "NlNKCuKHm",
       "email": "NlNKCuKHm@gmail.com",
-      "password": "4297f44b13955235245b2497399d7a93",
+      "password": "$2b$10$U6YH03AECcvOdNKdeLMxSeICeCNH15a4ff.Bzlatu6IaYeCo9VvVC",
       "isAdmin": false
     },
     {
       "name": "Sáng",
       "id": "vUx7VgHj0",
       "email": "vUx7VgHj0@gmail.com",
-      "password": "4297f44b13955235245b2497399d7a93",
+      "password": "$2b$10$U6YH03AECcvOdNKdeLMxSeICeCNH15a4ff.Bzlatu6IaYeCo9VvVC",
       "isAdmin": false
     },
     {
       "name": "Đào Thị Cam",
       "id": "8gd5HBarJ",
       "email": "8gd5HBarJ@gmail.com",
-      "password": "4297f44b13955235245b2497399d7a93",
+      "password": "$2b$10$U6YH03AECcvOdNKdeLMxSeICeCNH15a4ff.Bzlatu6IaYeCo9VvVC",
       "isAdmin": false
     },
     {
       "name": "Lý Mạc Sầu",
       "id": "ywi5jwWgZ",
       "email": "ywi5jwWgZ@gmail.com",
-      "password": "4297f44b13955235245b2497399d7a93",
+      "password": "$2b$10$U6YH03AECcvOdNKdeLMxSeICeCNH15a4ff.Bzlatu6IaYeCo9VvVC",
       "isAdmin": true,
-      "wrongLoginCount": 2
+      "wrongLoginCount": 5
     },
     {
       "name": "hieu thai",
@@ -74,7 +75,7 @@
       "password": "$2b$10$U6YH03AECcvOdNKdeLMxSeICeCNH15a4ff.Bzlatu6IaYeCo9VvVC",
       "id": "2FKqfnqKc",
       "isAdmin": true,
-      "wrongLoginCount": 1
+      "wrongLoginCount": 3
     }
   ],
   "transactions": [

@@ -51,7 +51,9 @@ module.exports = {
       }
 
       debugService.info(`UserId ${user.id} logged in`);
-      res.cookie("userId", user.id);
+      res.cookie("userId", user.id, {
+        signed: true,
+      });
 
       if (!user || !user.isAdmin) {
         debugService.info(`Not Amin User`);
@@ -62,5 +64,7 @@ module.exports = {
     } catch (err) {
       debugService.error(JSON.stringify(err));
     }
+
+    next();
   },
 };

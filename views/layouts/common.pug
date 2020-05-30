@@ -20,5 +20,6 @@ html
                         a(class='nav-link' href="/transactions") Transactions
                     li(class="nav-item")
                         a(class='nav-link' href="/auth/login") LOGIN
-
+            if user
+                p= user.name
         block content
