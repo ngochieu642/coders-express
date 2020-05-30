@@ -65,7 +65,8 @@
       "id": "ywi5jwWgZ",
       "email": "ywi5jwWgZ@gmail.com",
       "password": "4297f44b13955235245b2497399d7a93",
-      "isAdmin": true
+      "isAdmin": true,
+      "wrongLoginCount": 2
     },
     {
       "name": "hieu thai",
@@ -73,7 +74,7 @@
       "password": "$2b$10$U6YH03AECcvOdNKdeLMxSeICeCNH15a4ff.Bzlatu6IaYeCo9VvVC",
       "id": "2FKqfnqKc",
       "isAdmin": true,
-      "wrongLoginCount": 5
+      "wrongLoginCount": 1
     }
   ],
   "transactions": [
