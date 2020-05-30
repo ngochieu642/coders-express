@@ -10,11 +10,13 @@
     "start": "PORT=3000 DEBUG=auth,cookies nodemon server.js"
   },
   "dependencies": {
+    "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "debug-level": "^0.3.1",
     "express": "^4.17.1",
     "lowdb": "^1.0.0",
+    "md5": "^2.2.1",
     "pug": "^2.0.4",
     "shortid": "^2.2.15"
   },
