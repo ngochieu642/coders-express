@@ -1,18 +1,38 @@
+db = require('../db');
+
 module.exports.postCreate = (req, res, next) => {
-  let { name } = req.body;
-  let errs = [];
+    let {name, email, password} = req.body;
 
-  if (!!name && name.length > 30) {
-    errs.push("User Name maximum 30 characters");
-  }
+    let errs = [];
 
-  if (errs.length > 0) {
-    res.render("admin-user", {
-      errors: errs,
-      values: req.body,
-    });
-    return;
-  }
+    // Validate Input existeant
+    if (!name) {
+        errs.push("Name is required.")
+    }
 
-  next();
+    if (!email) {
+        errs.push("Email is required")
+    }
+
+    if (!password) {
+        errs.push("Password is require")
+    }
+
+    // Validate username
+    if (!!name && name.length > 30) {
+        errs.push("User Name maximum 30 characters");
+    }
+
+    // Validate
+
+
+    if (errs.length > 0) {
+        res.render("admin-user", {
+            errors: errs,
+            values: req.body,
+        });
+        return;
+    }
+
+    next();
 };

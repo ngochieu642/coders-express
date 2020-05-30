@@ -2,7 +2,7 @@ extends ./layouts/common.pug
 block content
     if errors
         each error in errors
-          .alert.alert-danger= error
+            .alert.alert-danger= error
 
     form(method='GET' action='/users?q=${q}', class='form-group')
         h1 Search Users
@@ -11,9 +11,18 @@ block content
             input(id='q', type='text', placeholder='Product Name', name='q', class="form-control")
             button(type='submit', class="btn btn-primary") Search
 
-    form(method='POST', action="/users/create")
+    form(method='POST', action="/users/create", class='form-group')
         h1 Create User
-        div(class='d-flex')
+        div(class='form-group')
             label(for='name', class='input-group-text') User name
             input(id='name', type="text", placeholder="Name", name="name", class="form-control", value=values ? values.name : '' )
-            button(type="submit", class="btn btn-primary") Create
+
+        div(class='form-group')
+            label(for='name', class='input-group-text') Email
+            input(id='email', type="text", placeholder="Email", name="email", class="form-control", value=values ? values.name : '' )
+
+        div(class='form-group')
+            label(for='password', class='input-group-text') Password
+            input(id='name', type="password", placeholder="Password", name="password", class="form-control", value=values ? values.name : '' )
+
+        button(type="submit", class="btn btn-primary") Create
