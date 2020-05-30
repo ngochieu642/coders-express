@@ -2,6 +2,7 @@ const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("db.json");
 const shortId = require("shortid");
+const md5 = require('md5');
 
 const db = low(adapter);
 db.defaults({ books: [], users: [], transactions: [] }).write();
@@ -9,6 +10,13 @@ db.defaults({ books: [], users: [], transactions: [] }).write();
 // Model function
 db.addItem = (model, content) => {
   let newItem = { ...content, id: shortId.generate() };
+
+  if (model === 'users') {
+    // Hash password with md5
+    let { password } = content;
+    newItem = {...newItem, password: md5(password)};
+  }
+
   if (!!model && !!content) {
     db.get(model).push(newItem).write();
   }

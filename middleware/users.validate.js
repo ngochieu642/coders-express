@@ -23,8 +23,12 @@ module.exports.postCreate = (req, res, next) => {
         errs.push("User Name maximum 30 characters");
     }
 
-    // Validate
+    // Validate email unique
+    let foundItems = db.get('users').find({email: email}).value()
 
+    if (!!foundItems){
+        errs.push("User with this email have already existed!")
+    }
 
     if (errs.length > 0) {
         res.render("admin-user", {

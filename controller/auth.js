@@ -1,6 +1,7 @@
 const db = require("../db");
 const shortId = require("shortid");
 const debugService = require("debug-level").log("auth");
+const md5 = require("md5");
 
 module.exports = {
   getLogin: function (req, res) {
@@ -20,7 +21,9 @@ module.exports = {
       return;
     }
 
-    if (user.password !== password) {
+    // Hash md5
+    let md5Hash = md5(password);
+    if (user.password !== md5Hash) {
       res.render("auth/login", {
         errors: ["Wrong password"],
         values: req.body,

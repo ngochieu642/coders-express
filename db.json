@@ -36,36 +36,42 @@
       "name": "Nguyen Van B",
       "id": "WYMB3--0Z",
       "email": "WYMB3--0Z@gmail.com",
-      "password": "123123",
+      "password": "4297f44b13955235245b2497399d7a93",
       "isAdmin": false
     },
     {
       "name": "Ly Thi C",
       "id": "NlNKCuKHm",
       "email": "NlNKCuKHm@gmail.com",
-      "password": "123123",
+      "password": "4297f44b13955235245b2497399d7a93",
       "isAdmin": false
     },
     {
       "name": "Sáng",
       "id": "vUx7VgHj0",
       "email": "vUx7VgHj0@gmail.com",
-      "password": "123123",
+      "password": "4297f44b13955235245b2497399d7a93",
       "isAdmin": false
     },
     {
       "name": "Đào Thị Cam",
       "id": "8gd5HBarJ",
       "email": "8gd5HBarJ@gmail.com",
-      "password": "123123",
+      "password": "4297f44b13955235245b2497399d7a93",
       "isAdmin": false
     },
     {
       "name": "Lý Mạc Sầu",
       "id": "ywi5jwWgZ",
       "email": "ywi5jwWgZ@gmail.com",
-      "password": "123123",
+      "password": "4297f44b13955235245b2497399d7a93",
       "isAdmin": true
+    },
+    {
+      "name": "hieu thai",
+      "email": "hieuthai642@gmail.com",
+      "password": "25d55ad283aa400af464c76d713c07ad",
+      "id": "Q9QAQoPyh"
     }
   ],
   "transactions": [
