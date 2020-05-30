@@ -2,23 +2,31 @@ const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 const adapter = new FileSync("db.json");
 const shortId = require("shortid");
-const md5 = require('md5');
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+const debugService = require("debug-level").log("db");
 
 const db = low(adapter);
 db.defaults({ books: [], users: [], transactions: [] }).write();
 
 // Model function
-db.addItem = (model, content) => {
+db.addItem = async (model, content) => {
   let newItem = { ...content, id: shortId.generate() };
 
-  if (model === 'users') {
-    // Hash password with md5
+  if (model === "users") {
+    // Hash password with bcrypt
     let { password } = content;
-    newItem = {...newItem, password: md5(password)};
-  }
 
-  if (!!model && !!content) {
-    db.get(model).push(newItem).write();
+    try {
+      let hashPassword = await bcrypt.hash(password, saltRounds);
+      newItem = { ...newItem, password: hashPassword };
+
+      if (!!model && !!content) {
+        db.get(model).push(newItem).write();
+      }
+    } catch (error) {
+      debugService.error(`db.js ${JSON.stringify(error)}`);
+    }
   }
 };
 
@@ -37,8 +45,13 @@ db.updateItemById = (modelName, itemId, content) => {
       db.get(modelName).find({ id: itemId }).assign({ title: title }).write();
       break;
     case "users":
-      let { name } = content;
-      db.get(modelName).find({ id: itemId }).assign({ name: name }).write();
+      for (let keyword in content) {
+        db.get(modelName)
+          .find({ id: itemId })
+          .assign({ [keyword]: content[keyword] })
+          .write();
+        break;
+      }
       break;
   }
 };

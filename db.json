@@ -70,8 +70,10 @@
     {
       "name": "hieu thai",
       "email": "hieuthai642@gmail.com",
-      "password": "25d55ad283aa400af464c76d713c07ad",
-      "id": "Q9QAQoPyh"
+      "password": "$2b$10$U6YH03AECcvOdNKdeLMxSeICeCNH15a4ff.Bzlatu6IaYeCo9VvVC",
+      "id": "2FKqfnqKc",
+      "isAdmin": true,
+      "wrongLoginCount": 5
     }
   ],
   "transactions": [

@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use("/users", countCookie, requireAuth, userRoutes);
 app.use("/books", countCookie, requireAuth, bookRoutes);
 app.use("/transactions", countCookie, requireAuth, transactionRoutes);
-app.use("/auth", countCookie, authRoutes);
+app.use("/auth", authRoutes);
 
 // Render
 app.get("/", countCookie, (request, response) => {

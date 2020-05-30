@@ -35,4 +35,20 @@ module.exports = {
     addItem("users", req.body);
     res.redirect("/users");
   },
+
+  increaseWrongLogin: (userId) => {
+    let user = findItemById("users", userId);
+
+    let { wrongLoginCount } = user;
+
+    if (!wrongLoginCount) {
+      wrongLoginCount = 1;
+    } else {
+      wrongLoginCount++;
+    }
+
+    return updateItemById("users", userId, {
+      wrongLoginCount: wrongLoginCount,
+    });
+  },
 };
